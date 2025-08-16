@@ -1,0 +1,19 @@
+name: webdav
+services:
+  docker-nginx-webdav:
+    #image: 0fl01/docker-nginx-webdav
+    build: .
+    container_name: webdav
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "192.168.1.43:8080:80"
+    volumes:
+      - "/home/stfu/Torrents:/media/data"
+    environment:
+      - USERNAME=${USERNAME}
+      - PASSWORD=${PASSWORD}
+    env_file:
+      - .env
+
