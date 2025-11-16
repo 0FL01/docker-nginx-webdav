@@ -8,12 +8,18 @@ services:
     security_opt:
       - no-new-privileges:true
     ports:
-      - "192.168.1.43:8080:80"
+      - "192.168.1.43:8088:80"
     volumes:
-      - "/home/stfu/Torrents:/media/data"
+      - "/home/stfu/Torrents:/media/data:Z"
+      #- "/home/stfu/Torrents:/media/data"
     environment:
       - USERNAME=${USERNAME}
       - PASSWORD=${PASSWORD}
     env_file:
       - .env
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "2"
 
