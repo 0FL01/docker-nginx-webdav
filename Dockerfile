@@ -13,8 +13,7 @@ RUN apk add --no-cache --virtual .build-deps \
         curl \
         git
 
-# Собираем динамический модуль nginx-dav-ext-module,
-# совместимый с версией nginx из базового образа.
+
 RUN set -eux; \
     NGINX_VERSION="$(nginx -v 2>&1 | sed 's#.*nginx/##')"; \
     cd /tmp; \
@@ -34,7 +33,8 @@ FROM docker.io/nginx:alpine
 RUN apk add --no-cache \
         apache2-utils \
         ca-certificates \
-        tzdata
+        tzdata \
+        openssl
 
 ENV TZ=Europe/Moscow
 
@@ -47,8 +47,8 @@ RUN sed -i '1iload_module /usr/lib/nginx/modules/ngx_http_dav_ext_module.so;' /e
 
 COPY webdav.conf /etc/nginx/conf.d/default.conf
 
-RUN mkdir -p "/media/data" /run/nginx \
-    && chown -R nginx:nginx "/media/data" /run/nginx
+RUN mkdir -p "/media/data" /run/nginx /etc/nginx/certs \
+    && chown -R nginx:nginx "/media/data" /run/nginx /etc/nginx/certs
 
 VOLUME /media/data
 
