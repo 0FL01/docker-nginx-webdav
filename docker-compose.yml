@@ -8,6 +8,7 @@ services:
     security_opt:
       - no-new-privileges:true
     ports:
+      - "192.168.1.124:8088:80"
       - "192.168.1.43:8088:80"
     volumes:
       - "/home/stfu/Torrents:/media/data:Z"
