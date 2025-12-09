@@ -5,8 +5,8 @@ services:
     build: .
     container_name: webdav
     restart: unless-stopped
-    security_opt:
-      - no-new-privileges:true
+    # security_opt:
+    #   - no-new-privileges:true  # Отключено - мешает доступу к файлам
     ports:
       - "192.168.1.124:8088:80"
       - "192.168.1.43:8088:80"

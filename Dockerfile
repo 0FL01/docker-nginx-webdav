@@ -16,7 +16,7 @@ RUN rm -f /etc/nginx/sites-enabled/default || true
 
 ENV TZ=Europe/Moscow
 
-RUN mkdir -p "/media/data" &&chown -R www-data:www-data "/media/data"
+RUN mkdir -p "/media/data"
 
 VOLUME /media/data
 
